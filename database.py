@@ -1235,20 +1235,16 @@ class Database:
         user = self.get_user(user_id)
         if not user:
             return None
-        # print(collection_name)
+        print(collection_name)
         print("collection_name внутри _get_rec_from_col" )
         shown_recommendations = user.get('shown_recommendations', [])
         collection = getattr(self, collection_name)
-        # print("section")
-        # print(section)
-        # print("collection")
-        # print(collection)
+
         # Общая логика для всех коллекций с массивом content
         if collection_name in ['activities', 'literature', 'questions_new']:
             section_doc = collection.find_one({"sector": section})
-            # print(section_doc)
-            # print("section_doc")
-            # if section_doc:
+
+            if section_doc:
                 content = section_doc.get('content', [])
                 for rec in content:
                     rec_id = f"{collection_name}_{section}_{content.index(rec)}"
